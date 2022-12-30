@@ -28,7 +28,6 @@ COPY ./.env /app/.env
 # Running Redis Queues With Laravel Horizon
 RUN php artisan horizon:publish
 
-
 # Ajusta as permissões
 RUN chmod +x /app/artisan
 RUN chown -R www-data:www-data /app/storage
@@ -36,9 +35,6 @@ RUN chown -R www-data:www-data /app/storage
 # Adiciona um crontab para acionar o schedule 
 RUN crontab -l | { cat; echo "* * * * * /usr/bin/php /app/artisan schedule:run >> /dev/null 2>&1"; } | crontab -
 # RUN crontab -l | { cat; echo "* * * * * /usr/bin/php /app/artisan sp:campaigns:dispatch >> /dev/null 2>&1"; } | crontab -
-
-# Ajustes no serviço cron
-RUN service cron start
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 

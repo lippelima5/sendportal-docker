@@ -15,5 +15,7 @@ docker run -d -p 6379:6379 --name ${CONTAINER_NAME}_redis --rm redis
 docker run --rm -d -p 8181:8181 --name ${CONTAINER_NAME} -v /app ${CONTAINER_NAME}
 
 # Run sendportal setup
-docker exec -it ${CONTAINER_NAME} /app/artisan key:generate && service cron start && /app/artisan sp:install 
+docker exec -it ${CONTAINER_NAME} /app/artisan key:generate  
+docker exec -it ${CONTAINER_NAME} service cron start
+docker exec -it ${CONTAINER_NAME} /app/artisan sp:install 
 
