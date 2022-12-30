@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cp .env docker/.env
+
 source .env
 
 # Cria uma iamgem docker do sendportal usando Dockerfile
